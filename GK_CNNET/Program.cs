@@ -34,7 +34,16 @@ builder.Services.AddScoped(sp => {
     var database = client.GetDatabase("BookDB");
     return database.GetCollection<Book>("Books");
 });
+// Đăng ký Collection Gamess - MongoDB
+builder.Services.AddScoped(sp => {
+    var client = sp.GetRequiredService<IMongoClient>();
+    var database = client.GetDatabase("store_game"); 
+    return database.GetCollection<Game>("games");    // Bảng gáme 
+});
 
+// Đăng ký GameService
+builder.Services.AddScoped<IGameService, GameService>();
+///// 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
