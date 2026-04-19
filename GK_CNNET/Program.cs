@@ -64,5 +64,7 @@ app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 app.MapControllers(); 
 app.MapGraphQL();    
 app.MapGrpcService<BookGrpcService>().EnableGrpcWeb();
+app.MapGrpcService<GameGrpcService>().EnableGrpcWeb();
+app.MapGrpcService<GameTelemetryGrpcService>().EnableGrpcWeb();
 
 app.Run();

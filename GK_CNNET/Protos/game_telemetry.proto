@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "GK_CNNET";
+
+service GameTelemetryGrpc {
+  rpc LogEvent (TelemetryEventRequest) returns (TelemetryAck);
+  rpc GetSessionSummary (TelemetrySummaryRequest) returns (TelemetrySummaryResponse);
+}
+
+message TelemetryEventRequest {
+  string session_id = 1;
+  string player_id = 2;
+  string event_type = 3;
+  int64 timestamp_ms = 4;
+  double latency_ms = 5;
+  int32 bounce_count = 6;
+  double red_pct = 7;
+  double blue_pct = 8;
+  string note = 9;
+}
+
+message TelemetryAck {
+  bool success = 1;
+  string message = 2;
+}
+
+message TelemetrySummaryRequest {
+  string session_id = 1;
+}
+
+message TelemetrySummaryResponse {
+  string session_id = 1;
+  int32 total_events = 2;
+  int32 bounce_events = 3;
+  int32 skill_events = 4;
+  int32 end_events = 5;
+  double avg_latency_ms = 6;
+  double min_latency_ms = 7;
+  double max_latency_ms = 8;
+  double events_per_second = 9;
+  int64 first_event_ms = 10;
+  int64 last_event_ms = 11;
+}

@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option csharp_namespace = "GK_CNNET";
+
+service GameGrpc {
+  rpc GetAllGames (GameEmptyRequest) returns (GameList);
+  rpc CreateGame (CreateGameRequest) returns (GameModel);
+  rpc UpdateGame (UpdateGameRequest) returns (GameModel);
+  rpc DeleteGame (GameDeleteRequest) returns (GameDeleteResponse);
+}
+
+message GameEmptyRequest {}
+
+message GameModel {
+  string id = 1;
+  string name = 2;
+  string genre = 3;
+  int32 price = 4;
+  string image_url = 5;
+  string platform = 6;
+  string description = 7;
+  float rating = 8;
+}
+
+message CreateGameRequest {
+  string name = 1;
+  string genre = 2;
+  int32 price = 3;
+  string image_url = 4;
+  string platform = 5;
+  string description = 6;
+  float rating = 7;
+}
+
+message UpdateGameRequest {
+  string id = 1;
+  string name = 2;
+  string genre = 3;
+  int32 price = 4;
+  string image_url = 5;
+  string platform = 6;
+  string description = 7;
+  float rating = 8;
+}
+
+message GameList {
+  repeated GameModel items = 1;
+}
+
+message GameDeleteRequest {
+  string id = 1;
+}
+
+message GameDeleteResponse {
+  bool success = 1;
+}

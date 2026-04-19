@@ -15,6 +15,9 @@ namespace GK_CNNET.Models
         [BsonElement("name")]
         public string Name { get; set; }
 
+        [BsonElement("genre")]
+        public string Genre { get; set; }
+
         // 
         [BsonElement("price")]
         public object PriceRaw { get; set; }
@@ -43,6 +46,28 @@ namespace GK_CNNET.Models
 
         [BsonElement("image")]
         public string Image { get; set; }
+
+        [BsonIgnore]
+        public string ImageUrl
+        {
+            get => Image;
+            set => Image = value;
+        }
+
+        [BsonIgnore]
+        public string Platform
+        {
+            get => Platforms != null && Platforms.Count > 0 ? Platforms[0] : string.Empty;
+            set
+            {
+                if (Platforms == null) Platforms = new List<string>();
+                if (Platforms.Count == 0) Platforms.Add(value);
+                else Platforms[0] = value;
+            }
+        }
+
+        [BsonElement("rating")]
+        public float Rating { get; set; }
 
         [BsonElement("game_url")]
         public string GameUrl { get; set; }
