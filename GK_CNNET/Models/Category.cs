@@ -11,5 +11,9 @@ namespace GK_CNNET.Models
 
         [BsonElement("name")]
         public string Name { get; set; }
+        [BsonElement("slug")]
+        public string Slug { get; set; }
+        [BsonElement("description")]
+        public string description { get; set; }
     }
 }

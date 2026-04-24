@@ -1,5 +1,6 @@
 using Grpc.Core;
 using GK_CNNET.DTOs;
+using MongoDB.Bson;
 
 namespace GK_CNNET.Services
 {
@@ -64,12 +65,8 @@ namespace GK_CNNET.Services
             {
                 Id = game.Id ?? string.Empty,
                 Name = game.Name ?? string.Empty,
-                Genre = game.Genre ?? string.Empty,
                 Price = parsedPrice,
-                ImageUrl = game.ImageUrl ?? game.Image ?? string.Empty,
-                Platform = game.Platform ?? string.Empty,
                 Description = game.Description ?? string.Empty,
-                Rating = game.Rating,
             };
         }
 
@@ -78,12 +75,12 @@ namespace GK_CNNET.Services
             return new GameCreateDto
             {
                 Name = request.Name,
-                Genre = request.Genre,
                 Price = request.Price.ToString(),
-                ImageUrl = request.ImageUrl,
-                Platform = request.Platform,
+                CategoryIds = request.CategoryIds.ToList(),
+                Platforms = request.Platforms.ToList(),
                 Description = request.Description,
-                Rating = request.Rating,
+                Image = request.Image,
+                DownloadLink = request.DownloadLink
             };
         }
 
@@ -92,12 +89,8 @@ namespace GK_CNNET.Services
             return new GameCreateDto
             {
                 Name = request.Name,
-                Genre = request.Genre,
                 Price = request.Price.ToString(),
-                ImageUrl = request.ImageUrl,
-                Platform = request.Platform,
                 Description = request.Description,
-                Rating = request.Rating,
             };
         }
     }
