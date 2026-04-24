@@ -59,14 +59,16 @@ namespace GK_CNNET.Services
 
         private static GameModel ToGameModel(GameReadDto game)
         {
-            var parsedPrice = int.TryParse(game.Price, out var priceInt) ? priceInt : 0;
+            long.TryParse(game.Price, out var priceLong);
 
             return new GameModel
             {
                 Id = game.Id ?? string.Empty,
                 Name = game.Name ?? string.Empty,
-                Price = parsedPrice,
+                Price = (int)priceLong,
                 Description = game.Description ?? string.Empty,
+                Image = game.Image ?? string.Empty,
+                DownloadLink = game.DownloadLink ?? string.Empty,
             };
         }
 
@@ -76,8 +78,10 @@ namespace GK_CNNET.Services
             {
                 Name = request.Name,
                 Price = request.Price.ToString(),
+
                 CategoryIds = request.CategoryIds.ToList(),
                 Platforms = request.Platforms.ToList(),
+
                 Description = request.Description,
                 Image = request.Image,
                 DownloadLink = request.DownloadLink

@@ -14,7 +14,7 @@ message GameEmptyRequest {}
 message GameModel {
   string id = 1;
   string name = 2;
-  int32 price = 3;
+  int64 price = 3;
   string image = 4;
   string platform = 5;
   string download_link = 6;
@@ -34,7 +34,7 @@ message CreateGameRequest {
 message UpdateGameRequest {
   string id = 1;
   string name = 2;
-  int32 price = 3;
+  int64 price = 3;
   string image = 4;
   string download_link = 5; 
   string platform = 6;

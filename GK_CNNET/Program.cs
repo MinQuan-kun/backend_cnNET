@@ -50,6 +50,16 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenLocalhost(5028, o => o.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2);
+
+    options.ListenLocalhost(7258, o => {
+        o.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2;
+        o.UseHttps();
+    });
+});
+
 var app = builder.Build();
 
 // Map các Endpoint
