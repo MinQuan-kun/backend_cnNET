@@ -29,11 +29,6 @@ builder.Services.AddSingleton<IMongoClient>(sp => {
     return new MongoClient(connectionString);
 });
 
-builder.Services.AddScoped(sp => {
-    var client = sp.GetRequiredService<IMongoClient>();
-    var database = client.GetDatabase("BookDB");
-    return database.GetCollection<Book>("Books");
-});
 // Đăng ký Collection Gamess - MongoDB
 builder.Services.AddScoped(sp => {
     var client = sp.GetRequiredService<IMongoClient>();
@@ -63,7 +58,6 @@ app.UseCors("AllowAll");
 app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 app.MapControllers(); 
 app.MapGraphQL();    
-app.MapGrpcService<BookGrpcService>().EnableGrpcWeb();
 app.MapGrpcService<GameGrpcService>().EnableGrpcWeb();
 app.MapGrpcService<GameTelemetryGrpcService>().EnableGrpcWeb();
 
