@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GK_CNNET.DTOs;
 using GK_CNNET.Services;
@@ -11,10 +11,12 @@ namespace GK_CNNET.Controllers
     public class GamesController : ControllerBase
     {
         private readonly IGameService _gameService;
+        private readonly ICloudinaryService _cloudinaryService;
 
-        public GamesController(IGameService gameService)
+        public GamesController(IGameService gameService, ICloudinaryService cloudinaryService)
         {
             _gameService = gameService;
+            _cloudinaryService = cloudinaryService;
         }
 
         [HttpGet]
@@ -44,6 +46,21 @@ namespace GK_CNNET.Controllers
         {
             var createdGame = await _gameService.CreateAsync(request);
             return CreatedAtAction(nameof(GetById), new { id = createdGame.Id }, createdGame);
+        }
+
+        [HttpPost("upload-only")]
+        public async Task<IActionResult> UploadImage(IFormFile image)
+        {
+            if (image == null || image.Length == 0)
+            {
+                return BadRequest("No image uploaded.");
+            }
+            var result = await _cloudinaryService.UploadImageAsync(image, "games");
+            if (result.Error != null)
+            {
+                return BadRequest(result.Error.Message);
+            }
+            return Ok(new { imageUrl = result.SecureUrl.ToString() });
         }
 
         [HttpPut("{id}")]

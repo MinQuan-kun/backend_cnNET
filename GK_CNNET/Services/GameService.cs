@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,8 +43,8 @@ namespace GK_CNNET.Services
 
                 Image = dto.Image ?? string.Empty,
                 DownloadLink = dto.DownloadLink ?? string.Empty,
+                Slug = Guid.NewGuid().ToString()
                 //IsActive = dto.IsActive,
-                //Slug = dto.Slug ?? string.Empty,
                 //CreatedAt = DateTime.UtcNow,
                 //UpdatedAt = DateTime.UtcNow
             };
