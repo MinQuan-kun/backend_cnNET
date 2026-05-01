@@ -14,8 +14,5 @@ namespace GK_CNNET.DTOs
         public string? Description { get; set; }
         public string? Image { get; set; }
         public string? DownloadLink { get; set; }
-        //public string Slug { get; set; }
-        //public DateTime UpdatedAt { get; set; }
-        //public DateTime CreatedAt { get; set; }
     }
 }
